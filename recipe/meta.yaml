@@ -22,17 +22,17 @@ source:
     # zeromq/libzmq#2317
     # zeromq/libzmq#2318
     #
-    - 0001-Windows-cmake-build-fixed.patch
-    - 0002-CPack-option-and-.txt-files-installation-dir.patch
-    - 0003-cmake-install-config-file.patch
-    - 0004-INSTALLATION-instructions.patch
-    - 0005-cmake-install-on-linux-fixed.patch
-    - 0006-Problem-name-of-static-library-generated-by-cmake-di.patch
-    - 0007-Problem-cmake-artefacts-different-from-make-generate.patch
-    - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch
+    - 0001-Windows-cmake-build-fixed.patch  # [win]
+    - 0002-CPack-option-and-.txt-files-installation-dir.patch  # [win]
+    - 0003-cmake-install-config-file.patch  # [win]
+    - 0004-INSTALLATION-instructions.patch  # [win]
+    - 0005-cmake-install-on-linux-fixed.patch  # [win]
+    - 0006-Problem-name-of-static-library-generated-by-cmake-di.patch  # [win]
+    - 0007-Problem-cmake-artefacts-different-from-make-generate.patch  # [win]
+    - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch  # [win]
 
 build:
-  number: 1
+  number: 2
   features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
@@ -41,7 +41,7 @@ build:
 requirements:
   build:
     - toolchain
-    - cmake
+    - cmake  # [win]
     - libsodium  # [not (win and py27)]
     - python  # [win]
     - vc 9    # [win and py27]
