@@ -41,6 +41,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake  # [not unix]
     - pkg-config  # [unix]
     - libsodium  # [not (win and py27)]
