@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [[ `uname` == Darwin ]]; then
-  export LDFLAGS="-Wl,-rpath,$PREFIX/lib $LDFLAGS"
+if [[ ${HOST} =~ .*darwin.* ]]; then
+  export LDFLAGS="-Wl,-rpath,${PREFIX}/lib ${LDFLAGS}"
 fi
 
-./configure --prefix="$PREFIX" --with-libsodium
-make -j${NUM_CPUS}
+./configure --prefix="${PREFIX}" --with-libsodium
+make -j${NUM_CPUS} ${VERBOSE_AT}
 make check
 make install
 

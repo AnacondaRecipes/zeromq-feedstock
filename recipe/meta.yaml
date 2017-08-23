@@ -40,20 +40,14 @@ build:
 
 requirements:
   build:
-    - toolchain
-    - cmake  # [win]
+    - {{ compiler('c') }}
+    - cmake  # [not unix]
     - pkg-config  # [unix]
     - libsodium  # [not (win and py27)]
     - python  # [win]
-    - vc 9    # [win and py27]
-    - vc 10   # [win and py34]
-    - vc 14   # [win and py>=35]
 
   run:
     - libsodium
-    - vc 9    # [win and py27]
-    - vc 10   # [win and py34]
-    - vc 14   # [win and py>=35]
 
 test:
   commands:
