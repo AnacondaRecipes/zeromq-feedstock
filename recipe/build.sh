@@ -11,8 +11,15 @@ export EXTRA_CMAKE_ARGS
 
 mkdir build
 cd build
-cmake -D WITH_PERF_TOOL=OFF -D ZMQ_BUILD_TESTS=ON -D ENABLE_CPACK=OFF -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=$PREFIX -D CMAKE_INSTALL_LIBDIR=lib ${EXTRA_CMAKE_ARGS} ..
-make -j${CPU_COUNT}
+cmake -DCMAKE_INSTALL_PREFIX=${PREFIX}  \
+      -DWITH_PERF_TOOL=OFF              \
+      -DZMQ_BUILD_TESTS=ON              \
+      -DENABLE_CPACK=OFF                \
+      -DCMAKE_BUILD_TYPE=Release        \
+      -DCMAKE_INSTALL_LIBDIR=lib        \
+      ${EXTRA_CMAKE_ARGS}               \
+      ..
+make -j${CPU_COUNT} ${VERBOSE_CM}
 make install
 
 # Add missing symlink for libzmq.so.5 required for pyzmq
