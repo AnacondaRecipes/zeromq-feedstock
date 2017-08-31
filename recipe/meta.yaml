@@ -1,6 +1,6 @@
 {% set name = "zeromq" %}
-{% set version = "4.2.1" %}
-{% set sha256 = "27d1e82a099228ee85a7ddb2260f40830212402c605a4a10b5e5498a7e0e9d03" %}
+{% set version = "4.2.2" %}
+{% set sha256 = "5b23f4ca9ef545d5bd3af55d305765e3ee06b986263b31967435d285a3e6df6b" %}
 
 package:
   name: {{ name|lower }}
@@ -9,27 +9,9 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
-
   sha256: {{ sha256 }}
   patches:
-    # Fixes in libzmq's cmake which enable a cmake build on windows, and cmake
-    # install in general.
-    #
-    # zeromq/libzmq#2304
-    # zeromq/libzmq#2295
-    # zeromq/libzmq#2294
-    # zeromq/libzmq#2311
-    # zeromq/libzmq#2317
-    # zeromq/libzmq#2318
-    #
-    - 0001-Windows-cmake-build-fixed.patch  # [win]
-    - 0002-CPack-option-and-.txt-files-installation-dir.patch  # [win]
-    - 0003-cmake-install-config-file.patch  # [win]
-    - 0004-INSTALLATION-instructions.patch  # [win]
-    - 0005-cmake-install-on-linux-fixed.patch  # [win]
-    - 0006-Problem-name-of-static-library-generated-by-cmake-di.patch  # [win]
-    - 0007-Problem-cmake-artefacts-different-from-make-generate.patch  # [win]
-    - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch  # [win]
+    - 0001-Add-missing-ZeroMQConfig.cmake.in.patch
 
 build:
   number: 2
@@ -75,6 +57,7 @@ about:
 extra:
   recipe-maintainers:
     - jakirkham
+    - mingwandroid
     - minrk
     - SylvainCorlay
     - JohanMabille
