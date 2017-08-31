@@ -56,6 +56,12 @@ about:
   home: http://zeromq.org
   license: LGPL 3
   summary: A high-performance asynchronous messaging library.
+  
+  description: |
+    ZeroMQ s a high-performance asynchronous messaging library, aimed at use
+    in distributed or concurrent applications.
+  doc_url: http://zeromq.org/intro:read-the-manual
+  dev_url: https://github.com/zeromq
 
 extra:
   recipe-maintainers:
