@@ -1,13 +1,10 @@
 #!/bin/bash
 
-EXTRA_CMAKE_ARGS=""
-if [[ `uname` == 'Darwin' ]];
-then
-    EXTRA_CMAKE_ARGS="-DZMQ_BUILD_FRAMEWORK=OFF"
+if [[ ${HOST} =~ .*darwin.* ]]; then
+  EXTRA_CMAKE_ARGS="-DZMQ_BUILD_FRAMEWORK=OFF"
 else
-    export LIBRARY_SEARCH_VAR=LD_LIBRARY_PATH
+  export LIBRARY_SEARCH_VAR=LD_LIBRARY_PATH
 fi
-export EXTRA_CMAKE_ARGS
 
 mkdir build
 cd build
