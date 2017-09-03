@@ -6,7 +6,9 @@ fi
 
 ./configure --prefix="${PREFIX}" --with-libsodium
 make -j${NUM_CPUS} ${VERBOSE_AT}
-make check
+# Cannot be run in parallel which is a shame as it compilers
+# a good amount of code first.
+make check ${VERBOSE_AT}
 make install
 
 # Generate CMake files, so downstream packages can use `find_package(ZeroMQ)`,
