@@ -1,7 +1,7 @@
-From b829174b49b9ec2e4d68afd14e16ce721a1af889 Mon Sep 17 00:00:00 2001
+From bd1d4d17208ed11bfd06e3efb5783e4eb75f7c8d Mon Sep 17 00:00:00 2001
 From: Nehal J Wani <nehaljw.kkd1@gmail.com>
 Date: Thu, 7 Sep 2017 02:50:53 -0500
-Subject: [PATCH] Use external msinttypes
+Subject: [PATCH 1/2] Use external msinttypes
 
 ---
  src/precompiled.hpp | 2 +-
@@ -9,7 +9,7 @@ Subject: [PATCH] Use external msinttypes
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/src/precompiled.hpp b/src/precompiled.hpp
-index 975bee1..feb1e5d 100644
+index b239635d..1a789ea7 100644
 --- a/src/precompiled.hpp
 +++ b/src/precompiled.hpp
 @@ -26,6 +26,7 @@
@@ -20,7 +20,7 @@ index 975bee1..feb1e5d 100644
  
  #ifndef __ZMQ_PRECOMPILED_HPP_INCLUDED__
  #define __ZMQ_PRECOMPILED_HPP_INCLUDED__
-@@ -61,7 +62,6 @@
+@@ -63,7 +64,6 @@
  #include <signal.h>
  #include <stdarg.h>
  #include <stddef.h>
@@ -29,7 +29,7 @@ index 975bee1..feb1e5d 100644
  #include <stdlib.h>
  #include <string.h>
 diff --git a/src/stdint.hpp b/src/stdint.hpp
-index 2f9a47a..973677c 100644
+index 2f9a47af..973677cf 100644
 --- a/src/stdint.hpp
 +++ b/src/stdint.hpp
 @@ -33,7 +33,7 @@
@@ -54,5 +54,5 @@ index 2f9a47a..973677c 100644
  
  #endif
 -- 
-2.5.1.windows.1
+2.13.0
 

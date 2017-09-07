@@ -1,0 +1,45 @@
+From 750c01b7aaebbc4968c39a6f14fb10409f9f58f0 Mon Sep 17 00:00:00 2001
+From: Ray Donnelly <mingw.android@gmail.com>
+Date: Thu, 7 Sep 2017 07:26:02 -0500
+Subject: [PATCH 2/2] Hack ZMQ_MSG_PROPERTY_ROUTING_ID to make it compile
+
+---
+ src/mechanism.cpp | 5 +++++
+ src/metadata.cpp  | 5 +++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/src/mechanism.cpp b/src/mechanism.cpp
+index 101161b3..9b7ab9d2 100644
+--- a/src/mechanism.cpp
++++ b/src/mechanism.cpp
+@@ -37,6 +37,11 @@
+ #include "wire.hpp"
+ #include "session_base.hpp"
+ 
++/*  DRAFT Msg property names.                                                 */
++#define ZMQ_MSG_PROPERTY_ROUTING_ID    "Routing-Id"
++#define ZMQ_MSG_PROPERTY_SOCKET_TYPE   "Socket-Type"
++#define ZMQ_MSG_PROPERTY_USER_ID       "User-Id"
++
+ zmq::mechanism_t::mechanism_t (const options_t &options_) :
+     options (options_)
+ {
+diff --git a/src/metadata.cpp b/src/metadata.cpp
+index e2a8a11d..b642f7b0 100644
+--- a/src/metadata.cpp
++++ b/src/metadata.cpp
+@@ -30,6 +30,11 @@
+ #include "precompiled.hpp"
+ #include "metadata.hpp"
+ 
++/*  DRAFT Msg property names.                                                 */
++#define ZMQ_MSG_PROPERTY_ROUTING_ID    "Routing-Id"
++#define ZMQ_MSG_PROPERTY_SOCKET_TYPE   "Socket-Type"
++#define ZMQ_MSG_PROPERTY_USER_ID       "User-Id"
++
+ zmq::metadata_t::metadata_t (const dict_t &dict) :
+     ref_cnt (1),
+     dict (dict)
+-- 
+2.13.0
+

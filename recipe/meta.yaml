@@ -7,13 +7,15 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
+#  fn: {{ name }}-{{ version }}.tar.gz
+#  url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
+  git_url: https://github.com/zeromq/libzmq.git
 
-  sha256: {{ sha256 }}
+#  sha256: {{ sha256 }}
   patches:
-    - 0001-Add-missing-ZeroMQConfig.cmake.in.patch
+  #  - 0001-Add-missing-ZeroMQConfig.cmake.in.patch
     - 0001-Use-external-msinttypes.patch # [win and py27]
+    - 0002-Hack-ZMQ_MSG_PROPERTY_ROUTING_ID-to-make-it-compile.patch
   #   - 0006-Problem-name-of-static-library-generated-by-cmake-di.patch
   #   - 0007-Problem-cmake-artefacts-different-from-make-generate.patch
   #   - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch
@@ -29,6 +31,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - git
     - cmake
     - libsodium  # [not (win and py27)]
     - msinttypes # [win and py27]
