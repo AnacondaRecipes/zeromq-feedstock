@@ -13,6 +13,7 @@ source:
   sha256: {{ sha256 }}
   patches:
     - 0001-Add-missing-ZeroMQConfig.cmake.in.patch
+    - 0001-Use-external-msinttypes.patch # [win and py27]
   #   - 0006-Problem-name-of-static-library-generated-by-cmake-di.patch
   #   - 0007-Problem-cmake-artefacts-different-from-make-generate.patch
   #   - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch
@@ -30,6 +31,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - libsodium  # [not (win and py27)]
+    - msinttypes # [win and py27]
     - python  # [win]
 
   run:
