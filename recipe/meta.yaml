@@ -7,7 +7,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
 
   sha256: {{ sha256 }}
@@ -19,11 +18,7 @@ source:
   #   - 0008-CMake-static-library-output-does-not-match-ZeroMQ-Co.patch
 
 build:
-  number: 1
-  features:
-    - vc9     # [win and py27]
-    - vc10    # [win and py34]
-    - vc14    # [win and py>=35]
+  number: 2
 
 requirements:
   build:
