@@ -19,10 +19,6 @@ source:
 
 build:
   number: 2
-  features:
-    - vc9     # [win and py27]
-    - vc10    # [win and py34]
-    - vc14    # [win and py>=35]
 
 requirements:
   build:
