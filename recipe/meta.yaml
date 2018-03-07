@@ -16,18 +16,18 @@ source:
     - 0005-osx-test.patch  # [osx]
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake  # [win]
-    - automake                     # [osx]
-    - autoconf                     # [osx]
-    - libtool                      # [osx]
-    - pkg-config                   # [osx]
-    - make
+    - cmake                        # [win]
+    - make                         # [not win]
+    - automake                     # [not win]
+    - autoconf                     # [not win]
+    - libtool                      # [not win]
+    - pkg-config                   # [not win]
   host:
     - libsodium
 
