@@ -1,16 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-if [[ `uname` == Darwin ]]; then
-  export LDFLAGS="-Wl,-rpath,$PREFIX/lib $LDFLAGS"
-fi
-
-if [[ `uname` == Darwin ]]; then
 ./autogen.sh
-fi
-./configure --prefix="$PREFIX" --with-libsodium="$PREFIX"
-make check
-make -j${CPU_COUNT}
+
+./configure --prefix="$PREFIX" --with-libsodium=yes
+
+make -j${CPU_COUNT} ${VERBOSE_AT}
+make -j${CPU_COUNT} check
 make install
 
 # Generate CMake files, so downstream packages can use `find_package(ZeroMQ)`,
