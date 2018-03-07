@@ -18,7 +18,7 @@ cmake -G "$CMAKE_GENERATOR" \
       ${EXTRA_CMAKE_ARGS}               \
       ..
 
-cmake --build . --config Release -- -j${CPU_COUNT}
+cmake --build . --config Release -- -j${CPU_COUNT} ${VERBOSE_CM}
 ctest -C Release
 cmake --build . --config Release --target install
 
