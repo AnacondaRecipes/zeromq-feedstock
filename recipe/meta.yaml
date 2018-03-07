@@ -16,11 +16,7 @@ source:
     - 0005-osx-test.patch  # [osx]
 
 build:
-  number: 1
-  features:
-    - vc9     # [win and py27]
-    - vc10    # [win and py34]
-    - vc14    # [win and py>=35]
+  number: 2
 
 requirements:
   build:
