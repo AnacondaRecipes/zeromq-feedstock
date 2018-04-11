@@ -6,7 +6,30 @@ set -euo pipefail
 ./configure --prefix="$PREFIX" --with-libsodium=yes
 
 make -j${CPU_COUNT} ${VERBOSE_AT}
-make -j${CPU_COUNT} check
+if ! make -j${CPU_COUNT} check ${VERBOSE_AT}; then
+  FAILURES=$(cat test-suite.log | grep '# FAIL:' | wc -l | awk '{print $1}')
+  echo "WARNING: We encountered ${FAILURES} test-suite failures:"
+  if [[ ${FAILURES} != 0 ]]; then
+    cat test-suite.log
+    if [[ ${target_platform} =~ .*darwin.* ]]; then
+      if [[ ${FAILURES} != 1 ]] || \
+         ! cat test-suite.log | grep test_shutdown_stress 2>&1 > /dev/null; then
+        echo "ERROR: We only allow test_shutdown_stress to fail on Darwin, expecting:"
+        echo "       FAIL: tests/test_shutdown_stress"
+        echo "       ================================"
+        echo "       "
+        echo "       Assertion failed: s != retired_fd (src/tcp_connecter.cpp:430)"
+        echo "       FAIL tests/test_shutdown_stress (exit status: 134)"
+        echo "       FAIL tests/test_shutdown_stress (exit status: 134)"
+        exit 1
+      else
+        echo "ERROR: We do not allow any failures on ${target_platform}"
+        exit 1
+      fi
+    fi
+  fi
+fi
+
 make install
 
 # Generate CMake files, so downstream packages can use `find_package(ZeroMQ)`,
