@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/zeromq/libzmq/releases/download/v{{ version }}/zeromq-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  git_url: https://github.com/zeromq/libzmq.git
+  git_tag: v{{ version }}
   patches:
     - rm-clang-format.patch
     - 0003-windows-install.patch
     - 0005-osx-test.patch  # [osx]
 
 build:
-  number: 3
+  number: 0
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - git
     - cmake                        # [win]
     - make                         # [not win]
     - automake                     # [not win]
@@ -29,9 +29,6 @@ requirements:
     - libtool                      # [not win]
     - pkg-config                   # [not win]
   host:
-    - libsodium
-
-  run:
     - libsodium
 
 test:
