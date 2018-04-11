@@ -28,6 +28,7 @@ requirements:
     - pkg-config                   # [not win]
   host:
     - libsodium
+    - msinttypes                   # [win and vc<14]
 
 test:
   commands:
