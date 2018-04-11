@@ -11,6 +11,8 @@ source:
   git_tag: v{{ version }}
   patches:
     - rm-clang-format.patch
+    - 0001-Remove-Windows-CMake-config-install-specialization-C.patch
+    - 0002-SLES11-Hackily-avoid-pthread_set_name_np-on-linux.patch
     - 0003-windows-install.patch
     - 0005-osx-test.patch  # [osx]
 
