@@ -1,5 +1,5 @@
 {% set name = "zeromq" %}
-{% set version = "4.2.4" %}
+{% set version = "4.2.5" %}
 
 package:
   name: {{ name|lower }}
