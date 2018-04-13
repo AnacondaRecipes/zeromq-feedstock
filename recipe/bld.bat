@@ -153,8 +153,8 @@ if errorlevel 1 exit 1
 .\bin\test_unbind_wildcard
 if errorlevel 1 exit 1
 REM .\bin\test_use_fd_ipc
-.\bin\test_use_fd_tcp
-if errorlevel 1 exit 1
+REM .\bin\test_use_fd_tcp
+REM if errorlevel 1 exit 1
 .\bin\test_xpub_manual
 if errorlevel 1 exit 1
 .\bin\test_xpub_nodrop
