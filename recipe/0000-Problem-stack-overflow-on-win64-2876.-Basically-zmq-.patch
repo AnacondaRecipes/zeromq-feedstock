@@ -1,0 +1,53 @@
+From 26bc110ba8c5f9d252c1f43f2649c86be7eb7ff6 Mon Sep 17 00:00:00 2001
+From: Alessio M <masariello@gmail.com>
+Date: Wed, 27 Jun 2018 18:01:02 +0100
+Subject: [PATCH] Problem: stack overflow on win64 #2876. Basically
+ zmq::signaler_t::wait suffers from stack bloating the same way socket_poller
+ was found to be bloated due to the large size of fd_set Solution: replace the
+ fd_set in the routine with an instance of optimized_fd_set_t
+
+---
+ src/signaler.cpp | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/src/signaler.cpp b/src/signaler.cpp
+index f63e55e5..725d458b 100644
+--- a/src/signaler.cpp
++++ b/src/signaler.cpp
+@@ -39,6 +39,7 @@
+ 
+ #include "precompiled.hpp"
+ #include "poller.hpp"
++#include "polling_util.hpp"
+ 
+ #if defined ZMQ_POLL_BASED_ON_POLL
+ #if !defined ZMQ_HAVE_WINDOWS && !defined ZMQ_HAVE_AIX
+@@ -278,16 +279,21 @@ int zmq::signaler_t::wait (int timeout_)
+ 
+ #elif defined ZMQ_POLL_BASED_ON_SELECT
+ 
+-    fd_set fds;
+-    FD_ZERO (&fds);
+-    FD_SET (r, &fds);
++    optimized_fd_set_t fds (FD_SETSIZE);
++    FD_ZERO (fds.get ());
++    FD_SET (_r, fds.get ());
+     struct timeval timeout;
+     if (timeout_ >= 0) {
+         timeout.tv_sec = timeout_ / 1000;
+         timeout.tv_usec = timeout_ % 1000 * 1000;
+     }
+ #ifdef ZMQ_HAVE_WINDOWS
+-    int rc = select (0, &fds, NULL, NULL, timeout_ >= 0 ? &timeout : NULL);
++    int rc =
++      select (0, fds.get (), NULL, NULL, timeout_ >= 0 ? &timeout : NULL);
++    wsa_assert (rc != SOCKET_ERROR);
++#else
++    int rc =
++      select (_r + 1, fds.get (), NULL, NULL, timeout_ >= 0 ? &timeout : NULL);
+     wsa_assert (rc != SOCKET_ERROR);
+ #else
+     int rc = select (r + 1, &fds, NULL, NULL, timeout_ >= 0 ? &timeout : NULL);
+-- 
+2.17.1
+

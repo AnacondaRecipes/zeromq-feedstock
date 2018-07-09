@@ -9,11 +9,12 @@ source:
   git_url: https://github.com/zeromq/libzmq.git
   git_tag: v{{ version }}
   patches:
+    - 0000-Problem-stack-overflow-on-win64-2876.-Basically-zmq-.patch
     - 0001-Remove-Windows-CMake-config-install-specialization-C.patch
     - 0002-SLES11-Hackily-avoid-pthread_set_name_np-on-linux.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # ZeroMQ have a terribe track record of SONAME management between minor
     # versions and across the two supported build systems unfortunately.
