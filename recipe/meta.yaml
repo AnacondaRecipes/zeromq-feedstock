@@ -16,9 +16,9 @@ source:
     - 0005-osx-test.patch
 
 build:
-  number: 2
+  number: 3
   run_exports:
-    - {{ pin_compatible(name, max_pin='x.x') }}
+    - {{ pin_subpackage('zeromq', max_pin='x.x') }}
 
 requirements:
   build:
