@@ -1,6 +1,6 @@
 {% set name = "zeromq" %}
-{% set version = "4.3.2" %}
-{% set sha256 = "ebd7b5c830d6428956b67a0454a7f8cbed1de74b3b01e5c33c5378e22740f763" %}
+{% set version = "4.3.4" %}
+{% set sha256 = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5" %}
 
 package:
   name: {{ name|lower }}
