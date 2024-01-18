@@ -1,6 +1,6 @@
 {% set name = "zeromq" %}
-{% set version = "4.3.4" %}
-{% set sha256 = "c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5" %}
+{% set version = "4.3.5" %}
+{% set sha256 = "6653ef5910f17954861fe72332e68b03ca6e4d9c7160eb3a8de5a5a913bfab43" %}
 
 package:
   name: {{ name|lower }}
@@ -35,7 +35,7 @@ requirements:
     - m2-patch  # [win]
 
   host:
-    - libsodium
+    - libsodium 1.0.18
   run:
     - libsodium
 
@@ -75,7 +75,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
       host:
-        - libsodium
+        - libsodium 1.0.18
         - {{ pin_subpackage("zeromq", exact=True) }}
       run:
         - libsodium
@@ -85,10 +85,18 @@ outputs:
         - test -f ${PREFIX}/lib/libzmq.a           # [unix]
 
 about:
-  home: http://zeromq.org
-  license: LGPL-3.0-or-later
-  license_file: COPYING.LESSER
+  home: https://zeromq.org
+  license: MPL-2.0
+  license_file: LICENSE
+  license_family: Other
   summary: A high-performance asynchronous messaging library.
+  description: |
+    The ZeroMQ lightweight messaging kernel is a library which extends the standard socket 
+    interfaces with features traditionally provided by specialised messaging middleware products. 
+    ZeroMQ sockets provide an abstraction of asynchronous message queues, multiple messaging 
+    patterns, message filtering (subscriptions), seamless access to multiple transport protocols and more.
+  dev_url: https://github.com/zeromq/libzmq
+  doc_url: https://zeromq.org/get-started/
 
 extra:
   recipe-maintainers:
