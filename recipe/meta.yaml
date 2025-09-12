@@ -15,7 +15,7 @@ source:
     - 002-osx-test.patch  # [osx]
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}  # [not win]
     # Windows DLLs have x.y.z in filename
@@ -31,11 +31,12 @@ requirements:
     - pkg-config                   # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
     - patch     # [not win]
     - m2-patch  # [win]
 
   host:
-    - libsodium 1.0.18
+    - libsodium {{ libsodium }}
   run:
     - libsodium
 
@@ -74,8 +75,9 @@ outputs:
         - pkg-config                   # [unix]
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
       host:
-        - libsodium 1.0.18
+        - libsodium {{ libsodium }}
         - {{ pin_subpackage("zeromq", exact=True) }}
       run:
         - libsodium
